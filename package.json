@@ -1,0 +1,32 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "A weather web app.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laviedegeorge/weather-app.git"
+  },
+  "keywords": [
+    "weather-information",
+    "weather",
+    "forecasts"
+  ],
+  "author": "Kelechi G. Apugo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laviedegeorge/weather-app/issues"
+  },
+  "homepage": "https://github.com/laviedegeorge/weather-app#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "src": "^1.1.2"
+  }
+}
