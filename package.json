@@ -12,7 +12,11 @@
     "type": "git",
     "url": "git+https://github.com/laviedegeorge/weather-app.git"
   },
-  "keywords": [],
+  "keywords": [
+    "weather-information",
+    "weather",
+    "forecasts"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {

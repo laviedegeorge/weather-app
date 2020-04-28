@@ -112,6 +112,10 @@
     padding: 0;
   }
   
+  .suggested-location > li {
+    cursor: pointer;
+  }
+
   .weather-details-cont {
     width: 85%;
     height: 35%;

@@ -189,11 +189,105 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"getWeather.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var API_KEY = "b8aa6b77e85dc3ac3f6db7694ca0e9ea";
+
+var getCityData = function getCityData() {
+  var city = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var lat = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 9.08;
+  var long = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 8.68;
+  var url;
+
+  if (city !== '') {
+    url = "//api.openweathermap.org/data/2.5/weather?q=".concat(city, "&appid=").concat(API_KEY, "&units=metric");
+  } else {
+    url = "//api.openweathermap.org/data/2.5/weather?lat=".concat(lat, "&lon=").concat(long, "&appid=").concat(API_KEY, "&units=metric");
+  }
+
+  console.log(url);
+  return new Promise(function (res, err) {
+    fetch(url).then(function (res) {
+      return res.json();
+    }).then(res).catch(err);
+  });
+};
+
+var getCityInfo = function getCityInfo(city, displayData, lat, long) {
+  getCityData(city, lat, long).then(displayData).catch(function (err) {
+    console.log(err, "City not Found!!!");
+  });
+};
+
+var _default = getCityInfo;
+exports.default = _default;
+},{}],"index.js":[function(require,module,exports) {
 "use strict";
 
 require("./styles/style.css");
-},{"./styles/style.css":"styles/style.css"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+var _getWeather = _interopRequireDefault(require("./getWeather"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+document.getElementById("city_input").value = '';
+
+var displayData = function displayData(obj) {
+  var dataObj = obj;
+  document.getElementById("deg").innerHTML = Math.round(obj.main.temp);
+  document.getElementById("location").innerHTML = obj.name;
+  document.getElementById('weather_icon').setAttribute('src', "http://openweathermap.org/img/wn/".concat(obj.weather[0].icon, ".png"));
+  document.getElementById('weather_description').innerHTML = obj.weather[0].description;
+  document.getElementById("cloudy").innerHTML = "".concat(obj.clouds.all, "%");
+  document.getElementById("humidity").innerHTML = "".concat(obj.main.humidity, "%");
+  document.getElementById("wind").innerHTML = "".concat(obj.wind.speed, "km/h");
+  console.log(dataObj);
+  return dataObj;
+};
+
+var getCity = function getCity() {
+  var city = document.getElementById("city_input").value;
+  (0, _getWeather.default)(city, displayData); //console.log(cityInfo);
+};
+/* CLICKING OF THE SERCH BUTTON */
+
+
+var searchBtn = document.getElementById("search");
+searchBtn.addEventListener("click", getCity);
+/* CLICKING OF THE SUGGESTED LOCATIONS */
+
+var suggestedLocation = document.querySelectorAll(".suggested-location li");
+suggestedLocation.forEach(function (li) {
+  li.addEventListener("click", function (e) {
+    var value = e.target.innerHTML;
+    (0, _getWeather.default)(value, displayData);
+  });
+});
+/* GETTING USER LOCATION */
+
+/* const getLocation = () => {
+  
+}; */
+
+var getLocationByCords = function getLocationByCords(position) {
+  var city = '';
+  var lat = position.coords.latitude.toFixed(2);
+  var long = position.coords.longitude.toFixed(2);
+  console.log(lat, long);
+  (0, _getWeather.default)(city, displayData, lat, long);
+};
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(getLocationByCords);
+} else {
+  alert("Geolocation is not supported by this browser or is disabled.");
+}
+},{"./styles/style.css":"styles/style.css","./getWeather":"getWeather.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
