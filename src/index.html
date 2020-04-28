@@ -4,10 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
-    <h1>parcellll!!!!!</h1>
-</body>
-<script src="./index.js"></script>
+    <div class="main">
+      <div class="main_weather">
+        <h1>The weather App</h1>
+        <div class="main_weather-info">
+          <p class="degrees">
+            <span id="deg"></span> 
+            <sup>0</sup>
+          </p>
+          <div class="location-time">
+            <p class="location" id="location"></p>
+            <p class="date">06:09 - Monday, 9 Sep '19</p>
+          </div>
+          <p class="weather">
+            <img 
+              src="#" 
+              height="35px"
+              width="35px"
+              id="weather_icon"
+            />
+            <span id="weather_description"></span>
+          </p>
+        </div>
+      </div>
+      <div class="main_details">
+        <div class="enter-location">
+          <input type="text" id="city_input" placeholder="Another location" />
+          <button id="search">search</button>
+        </div>
+        <ul class="suggested-location">
+          <li>London</li>
+          <li>Lagos</li>
+          <li>Beijing</li>
+          <li>New york</li>
+        </ul>
+        <div class="weather-details-cont">
+          <p>Weather Details</p>
+          <p>Cloudy <span id="cloudy"></span> </p>
+          <p>Humidity <span id="humidity"></span></p>
+          <p>Wind <span id="wind"></span></p>
+        </div>
+      </div>
+    </div>
+
+    <script src="./index.js"></script>
+  </body>
 </html>

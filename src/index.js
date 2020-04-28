@@ -1,1 +1,1 @@
- // import 'src/styles/syle.css';
+import './styles/style.css' 
