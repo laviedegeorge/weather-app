@@ -6,32 +6,39 @@
     <meta name="keywords" content="weather-information, weather, forecasts">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Weather App</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 </head>
 <body>
     <div class="main">
-      <div class="main_weather">
-        <h1>The weather App</h1>
+      <div class="main_weather" id="main_weather">
+        <div class="header">
+          <h1>The weather App</h1>
+          <!-- ----------------BUTTON FOR MOBILE--------------- -->
+          <nav>
+              <span class="material-icons toggle">
+                search
+              </span>
+              <span class="material-icons toggle">
+                menu
+              </span>
+          </nav>
+        </div>
+        
         <div class="main_weather-info">
           <p class="degrees">
-            <span id="deg"></span> 
-            <sup>0</sup>
+            <span id="deg"></span>
           </p>
           <div class="location-time">
             <p class="location" id="location"></p>
-            <p class="date">06:09 - Monday, 9 Sep '19</p>
+            <p class="date" id="date"></p>
           </div>
-          <p class="weather">
-            <img 
-              src="#" 
-              height="35px"
-              width="35px"
-              id="weather_icon"
-            />
-            <span id="weather_description"></span>
+          <p class="weather" id="weather_cont">
+            
           </p>
         </div>
       </div>
-      <div class="main_details">
+      <div class="main_details" id="main-details">
         <div class="enter-location">
           <input type="text" id="city_input" placeholder="Another location" />
           <button id="search">search</button>

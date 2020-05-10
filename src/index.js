@@ -1,49 +1,39 @@
 import './styles/style.css' 
-import getCityInfo from "./getWeather";
+import getCityInfo from './js/getWeather';
+import displayInfo from './js/displayInfo';
 
 document.getElementById("city_input").value = '';
 
 const displayData = obj => {
-  const dataObj = obj;
-  document.getElementById("deg").innerHTML = Math.round(obj.main.temp);
-  document.getElementById("location").innerHTML = obj.name;
-  document.getElementById('weather_icon').setAttribute('src', `http://openweathermap.org/img/wn/${obj.weather[0].icon}.png`)
-  document.getElementById('weather_description').innerHTML =  obj.weather[0].description;
-  document.getElementById("cloudy").innerHTML = `${obj.clouds.all}%`;
-  document.getElementById("humidity").innerHTML = `${obj.main.humidity}%`;
-  document.getElementById("wind").innerHTML = `${obj.wind.speed}km/h`;
-  console.log(dataObj);
-  return dataObj;
+  displayInfo(obj);
 };
 
 const getCity = () => {
+  mainD.classList.remove('side-nav');
   const city = document.getElementById("city_input").value;
   getCityInfo(city, displayData);
-  //console.log(cityInfo);
 };
 
-/* CLICKING OF THE SERCH BUTTON */
+/* ----------------CLICKING ON THE SEARCH BUTTON ------------------------------*/
 const searchBtn = document.getElementById("search");
 searchBtn.addEventListener("click", getCity);
 
-/* CLICKING OF THE SUGGESTED LOCATIONS */
+/* ---------------CLICKING ON THE SUGGESTED LOCATIONS -------------------------*/
 const suggestedLocation = document.querySelectorAll(".suggested-location li");
 suggestedLocation.forEach(li => {
   li.addEventListener("click", e => {
+    mainD.classList.remove('side-nav');
     const value = e.target.innerHTML;
     getCityInfo(value, displayData);
   });
 });
 
-/* GETTING USER LOCATION */
-/* const getLocation = () => {
-  
-}; */
+/* --------------------GETTING USER LOCATION ----------------------------------*/
 const getLocationByCords = (position)=>{
   const city = '';
   const lat = position.coords.latitude.toFixed(2);
   const long = position.coords.longitude.toFixed(2);
-  console.log(lat,long)
+  //console.log(lat,long)
   getCityInfo(city, displayData, lat, long,);
 }
 
@@ -52,3 +42,24 @@ if (navigator.geolocation) {
 } else {
   alert("Geolocation is not supported by this browser or is disabled.");
 }
+
+
+/* ------------------ FOR MOBILE TOGGLE BUTTON-------------- */
+const mainD = document.getElementById('main-details');
+const toggleBtn = document.querySelectorAll('.toggle');
+toggleBtn.forEach((btn)=>{
+  btn.addEventListener('click', (e)=>{
+    if (e.target === btn) {
+      mainD.classList.add('side-nav');
+    } else {
+      mainD.classList.remove('side-nav');
+    }
+  })
+})
+
+const mainWeather = document.getElementById('main_weather')
+mainWeather.addEventListener('click', (e)=>{
+  if (e.target ===  mainWeather) {
+    mainD.classList.remove('side-nav');
+  }
+})

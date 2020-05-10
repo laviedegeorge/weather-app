@@ -7,7 +7,7 @@ const getCityData = (city = '', lat = 9.08 , long = 8.68) => {
   } else {
     url = `//api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`;
   }
-  console.log(url)
+  
   return new Promise((res, err) => {
     fetch(url)
       .then(res => res.json())
